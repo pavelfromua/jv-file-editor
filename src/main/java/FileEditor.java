@@ -1,14 +1,12 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
-public class FileEditor{
+public class FileEditor {
     public static void main(String[] args) {
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader reader = new BufferedReader(isr);
@@ -93,7 +91,8 @@ public class FileEditor{
         if (commandSeparator == -1) {
             System.out.println("Не верный формат команды");
         } else {
-            Path fullPath = Paths.get(consoleLine.substring(0, commandSeparator) + "\\" + consoleLine.substring(commandSeparator).trim());
+            Path fullPath = Paths.get(consoleLine.substring(0, commandSeparator) + "\\"
+                    + consoleLine.substring(commandSeparator).trim());
             Path path = fullPath.getParent();
 
             if (Files.exists(path)) {
@@ -144,7 +143,8 @@ public class FileEditor{
         if (commandSeparator == -1) {
             System.out.println("Не верный формат команды");
         } else {
-            Path fullPath = Paths.get(consoleLine.substring(0, commandSeparator) + "\\" + consoleLine.substring(commandSeparator).trim());
+            Path fullPath = Paths.get(consoleLine.substring(0, commandSeparator) + "\\"
+                    + consoleLine.substring(commandSeparator).trim());
             Path path = fullPath.getParent();
 
             if (Files.exists(path)) {
@@ -178,7 +178,8 @@ public class FileEditor{
         if (commandSeparator == -1) {
             System.out.println("Не верный формат команды");
         } else {
-            Path fullPath = Paths.get(consoleLine.substring(0, commandSeparator) + "\\" + consoleLine.substring(commandSeparator).trim());
+            Path fullPath = Paths.get(consoleLine.substring(0, commandSeparator) + "\\"
+                    + consoleLine.substring(commandSeparator).trim());
             Path path = fullPath.getParent();
             Path fileName = fullPath.getFileName();
 
@@ -189,19 +190,22 @@ public class FileEditor{
                     try {
                         Files.createDirectory(path);
                     } catch (IOException e) {
-                        System.out.println("Проверьте формат пути. Конечный каталог/файл не был создан");
+                        System.out.println("Проверьте формат пути. "
+                                + "Конечный каталог/файл не был создан");
                     }
                 }
             }
 
             if (Files.exists(path)) {
                 if (Files.exists(fullPath)) {
-                    int answer = getAnswerYesNo("Файл \"" + fileName + "\" существует. Разрешить перезапись?");
+                    int answer = getAnswerYesNo("Файл \"" + fileName + "\" существует. "
+                            + "Разрешить перезапись?");
 
                     if (answer == 1) {
                         try {
                             List<String> lines = Arrays.asList(fileData);
-                            Files.write(fullPath, lines, StandardCharsets.UTF_8, StandardOpenOption.APPEND);
+                            Files.write(fullPath, lines, StandardCharsets.UTF_8,
+                                    StandardOpenOption.APPEND);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -211,10 +215,12 @@ public class FileEditor{
                         Files.createFile(fullPath);
                         if (!fileData.isEmpty()) {
                             List<String> lines = Arrays.asList(fileData);
-                            Files.write(fullPath, lines, StandardCharsets.UTF_8, StandardOpenOption.APPEND);
+                            Files.write(fullPath, lines, StandardCharsets.UTF_8,
+                                    StandardOpenOption.APPEND);
                         }
                     } catch (IOException e) {
-                        System.out.println("Проверьте формат команды. Конечный каталог/файл не был создан");
+                        System.out.println("Проверьте формат команды. "
+                                + "Конечный каталог/файл не был создан");
                     }
                 }
             }
